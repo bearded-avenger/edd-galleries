@@ -1,0 +1,98 @@
+/*
+ * jQuery FlexSlider v2.2.0
+ * http://www.woothemes.com/flexslider/
+ *
+ * Copyright 2012 WooThemes
+ * Free to use under the GPLv2 license.
+ * http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Contributing author: Tyler Smith (@mbmufffin)
+ */
+
+
+/* Browser Resets
+*********************************/
+.ba-edd-gallery-container a:active,
+.ba-edd-post-gallery a:active,
+.ba-edd-gallery-container a:focus,
+.ba-edd-post-gallery a:focus  {outline: none;}
+.entry-content .slides,
+.slides,
+.entry-content li,
+.entry-content .ba-edd-gallery-direction-nav,
+.ba-edd-gallery-direction-nav {margin: 0; padding: 0; list-style: none;}
+
+/* Icon Fonts
+*********************************/
+/* Font-face Icons */
+@font-face {
+	font-family: 'flexslider-icon';
+	src:url('fonts/flexslider-icon.eot');
+	src:url('fonts/flexslider-icon.eot?#iefix') format('embedded-opentype'),
+		url('fonts/flexslider-icon.woff') format('woff'),
+		url('fonts/flexslider-icon.ttf') format('truetype'),
+		url('fonts/flexslider-icon.svg#flexslider-icon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* FlexSlider Necessary Styles
+*********************************/
+.ba-edd-post-gallery {margin: 0; padding: 0;overflow: hidden;}
+.ba-edd-post-gallery .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+.ba-edd-post-gallery .slides img {width: 100%; display: block;border-radius:0;}
+.ba-edd-gallery-pauseplay span {text-transform: capitalize;}
+
+/* Clearfix for the .slides element */
+.slides:after {content: "\0020"; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .slides {display: block;}
+* html .slides {height: 1%;}
+
+/* No JavaScript Fallback */
+/* If you are not using another script, such as Modernizr, make sure you
+ * include js that eliminates this class on page load */
+.no-js .slides > li:first-child {display: block;}
+
+/* FlexSlider Default Theme
+*********************************/
+.ba-edd-post-gallery { padding-bottom:30px; margin: 0 0 1.714285714rem; position: relative; zoom: 1; }
+.ba-edd-gallery-viewport { max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease; }
+.loading .ba-edd-gallery-viewport { max-height: 300px; }
+.ba-edd-post-gallery .slides { zoom: 1; }
+.carousel li { margin-right: 5px; }
+
+/* Direction Nav */
+.ba-edd-gallery-direction-nav {*height: 0;}
+.ba-edd-gallery-direction-nav a  { display: block; width: 40px; height: 55px; margin: -20px 0 0; position: absolute; top: 50%; z-index: 10; overflow: hidden; opacity: 0; cursor: pointer; -webkit-transition: all .3s ease; -moz-transition: all .3s ease; transition: all .3s ease; }
+.ba-edd-gallery-direction-nav .ba-edd-gallery-prev { left: -50px; }
+.ba-edd-gallery-direction-nav .ba-edd-gallery-next { right: -50px; text-align: right; }
+.ba-edd-post-gallery:hover .ba-edd-gallery-prev { opacity: 0.7; left: 10px; }
+.ba-edd-post-gallery:hover .ba-edd-gallery-next { opacity: 0.7; right: 10px; }
+.ba-edd-post-gallery:hover .ba-edd-gallery-next:hover, .ba-edd-post-gallery:hover .ba-edd-gallery-prev:hover { opacity: 1; }
+.ba-edd-gallery-direction-nav .ba-edd-gallery-disabled { opacity: 0!important; filter:alpha(opacity=0); cursor: default; }
+.ba-edd-gallery-direction-nav a:before  { font-family: "flexslider-icon"; font-size: 40px; display: inline-block; content: '\f001'; }
+.ba-edd-gallery-direction-nav a.ba-edd-gallery-next:before  { content: '\f002'; }
+
+/* Pause/Play */
+.ba-edd-gallery-pauseplay a { display: block; width: 20px; height: 20px; position: absolute; bottom: 5px; left: 10px; opacity: 0.8; z-index: 10; overflow: hidden; cursor: pointer; color: #000; }
+.ba-edd-gallery-pauseplay a:before  { font-family: "flexslider-icon"; font-size: 20px; display: inline-block; content: '\f004'; }
+.ba-edd-gallery-pauseplay a:hover  { opacity: 1; }
+.ba-edd-gallery-pauseplay a.ba-edd-gallery-play:before { content: '\f003'; }
+
+/* Control Nav */
+.ba-edd-post-gallery .ba-edd-gallery-control-nav {width: 100%; margin-top: 10px; line-height: 1em;text-align: center;list-style:none;}
+.ba-edd-gallery-control-nav li {margin: 0 6px; display: inline-block; zoom: 1; *display: inline;}
+.ba-edd-gallery-control-paging li a {width: 11px; height: 11px; display: block; background: #666; background: rgba(0,0,0,0.5); cursor: pointer; text-indent: -9999px; -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); -moz-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); -o-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); box-shadow: inset 0 0 3px rgba(0,0,0,0.3); }
+.ba-edd-gallery-control-paging li a:hover { background: #333; background: rgba(0,0,0,0.7); }
+.ba-edd-gallery-control-paging li a.ba-edd-gallery-active { background: #000; background: rgba(0,0,0,0.9); cursor: default; }
+
+.ba-edd-gallery-control-thumbs {margin: 5px 0 0; position: static; overflow: hidden;}
+.ba-edd-gallery-control-thumbs li {width: 25%; float: left; margin: 0;}
+.ba-edd-gallery-control-thumbs img {width: 100%; display: block; opacity: .7; cursor: pointer;}
+.ba-edd-gallery-control-thumbs img:hover {opacity: 1;}
+.ba-edd-gallery-control-thumbs .ba-edd-gallery-active {opacity: 1; cursor: default;}
+
+@media screen and (max-width: 860px) {
+  .ba-edd-gallery-direction-nav .ba-edd-gallery-prev { opacity: 1; left: 10px;}
+  .ba-edd-gallery-direction-nav .ba-edd-gallery-next { opacity: 1; right: 10px;}
+}
