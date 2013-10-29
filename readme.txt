@@ -13,6 +13,13 @@ Turns all WP Gallery Shortcodes into a responsive gallery if EDD is active
 
 This plugin turns a product gallery into a responsive image gallery. Currently if Easy Digital Downloads is active, then it will hijack the [gallery] shortcode across the site to maintain consistency.
 
+It was created for my online shop, then decided to port it into a plugin and give it away. 
+
+A real demo will be up eventually. Until then check it out in action here.
+http://nickhaskins.co/products/fotos/
+
+Note: the plugin version here on github has basically zero styling
+
 == Installation ==
 
 1. Upload `edd-galleries` to the `/wp-content/plugins/` directory
